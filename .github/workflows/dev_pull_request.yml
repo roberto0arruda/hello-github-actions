@@ -1,0 +1,22 @@
+name: create pull_request on develop
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Make changes to pull request here
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+
+      - name: Check outputs
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
