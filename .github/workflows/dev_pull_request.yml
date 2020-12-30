@@ -1,10 +1,13 @@
 name: create pull_request on develop
 
 on:
-  pull_request:
-    types: [ opened ]
+  push:
     branches:
       - main
+  # pull_request:
+  #   types: [ opened ]
+  #   branches:
+  #     - main
 
 jobs:
   pull-request:
