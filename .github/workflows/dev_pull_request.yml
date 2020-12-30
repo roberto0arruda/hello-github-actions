@@ -21,8 +21,8 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
-          base: develop
-          branch: hotfix-test
+          base: main
+          branch: develop
           labels: automated pr
 
       - name: Check outputs
