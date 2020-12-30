@@ -11,13 +11,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
       # Make changes to pull request here
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
-          base: main
-          branch: develop
+          branch: ${{ steps.extract_branch.outputs.branch }}
 
       - name: Check outputs
         run: |
