@@ -1,0 +1,31 @@
+name: create pull_request on develop
+
+on:
+  push:
+    branches:
+      - main
+  # pull_request:
+  #   types: [ opened ]
+  #   branches:
+  #     - main
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Print branch
+        run: echo ${{ steps.extract_branch.output.branch }}
+
+      # Make changes to pull request here
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "develop"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
