@@ -17,15 +17,8 @@ jobs:
         id: extract_branch
 
       # Make changes to pull request here
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v3
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
         with:
-          base: main
-          branch: develop
-          labels: automated pr
-
-      - name: Check outputs
-        run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          destination_branch: "develop"
+          
