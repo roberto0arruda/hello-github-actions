@@ -23,6 +23,7 @@ jobs:
         with:
           base: develop
           branch: hotfix-test
+          labels: automated pr
 
       - name: Check outputs
         run: |
