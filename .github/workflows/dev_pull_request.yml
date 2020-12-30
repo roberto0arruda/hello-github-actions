@@ -2,22 +2,23 @@ name: create pull_request on develop
 
 on:
   pull_request:
+    types: [ opened ]
     branches:
       - main
-    types: [ opened ]
 
 jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+
+      - name: Print branch
+        run: echo ${{ steps.extract_branch.output.branch }}
 
       # Make changes to pull request here
       - name: pull-request
